@@ -1,3 +1,4 @@
+let prompt = require("prompt-sync")();
 let candidats = [
     {
         cin: "AB123456",
@@ -13,7 +14,7 @@ let candidats = [
         prenom: "Wiam",
         partiPolitique: "RNI",
         age: 22,
-        electeurs: ["AB123456","DC635473","HH509352"]
+        electeurs: ["AB123456", "DC635473", "HH509352"]
     },
     {
         cin: "HH178356",
@@ -69,7 +70,7 @@ let candidats = [
         prenom: "Aya",
         partiPolitique: "RNI",
         age: 44,
-        electeurs: ["DN674853","DC546738"]
+        electeurs: ["DN674853", "DC546738"]
     },
     {
         cin: "HH839462",
@@ -101,7 +102,7 @@ let candidats = [
         prenom: "Wiam",
         partiPolitique: "PAM",
         age: 20,
-        electeurs: ["DC265396","CN123231"]
+        electeurs: ["DC265396", "CN123231"]
     },
     {
         cin: "HH973527",
@@ -136,5 +137,69 @@ let candidats = [
         electeurs: []
     }
 ]
+function AjouterCandidat(candidat) {
+    let obj = {};
+    let cin = prompt('entrez CIN de candidat : ');
+    let nom = prompt('entrez le nom de candidat: ');
+    let prenom = prompt('entrez le prenom : ');
+    let partipolitique = prompt('quel partie politique : ');
+    let age = +prompt("l'age : ");
+    let index = candidats.findIndex(function (c) {
+        return c.cin === cin;
+    });
+    if (index === -1) {
 
-console.log(candidats);
+        obj.cin = cin;
+        obj.nom = nom;
+        obj.prenom = prenom;
+        obj.partiPolitique = partipolitique;
+        obj.age = age;
+        obj.electeurs = [];
+        candidat.push(obj);
+        console.log("Le candidat a été ajouté avec succès");
+    } else {
+        console.log("Ce CIN existe déjà");
+    }
+
+}
+function AjouterPlusieurCandidat(candidat) {
+    let nombre = +prompt("combien du candidat voulez-vous ajouter : ");
+    for (let i = 0; i < nombre; i++) {
+        AjouterCandidat(candidat)
+    }
+}
+
+
+
+
+
+
+let choix;
+while (choix !== "0") {
+    console.log("*********************************");
+    console.log("      GESTION DES ÉLECTIONS      ");
+    console.log("*********************************");
+    console.log("1 --> Ajouter un nouveau candidat");
+    console.log("2 --> Ajouter plusieurs candidats ");
+    console.log("3 --> Afficher la liste des candidats");
+    console.log("4 --> Voter pour un candidat");
+    console.log("5 --> Modifier les informations d'un candidat");
+    console.log("6 --> Supprimer un candidat");
+    console.log("7 --> Rechercher des candidats");
+    console.log("8 --> Statistiques de l'élection");
+    console.log("0 --> Quitter");
+
+    choix = prompt("Votre choix : ");
+    switch (choix) {
+        case "1":
+            AjouterCandidat(candidats);
+            break;
+
+        case "2":
+            AjouterPlusieurCandidat(candidats);
+            break;
+        default:
+            console.log("Choix invalide !");
+
+    }
+}
