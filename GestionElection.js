@@ -74,7 +74,7 @@ let candidats = [
     },
     {
         cin: "SD364789",
-        nom: "Wadaa",
+        nom: "Merzak",
         prenom: "Aya",
         partiPolitique: "RNI",
         age: 44,
@@ -191,20 +191,16 @@ function AfficherListeCandidats(candidat) {
             console.log("nom : ", candidat[i].nom);
             console.log("prénom : ", candidat[i].prenom);
             console.log("Parti politique : ", candidat[i].partiPolitique);
-            console.log("Âge : ", candidat[i].age);
+            console.log("Age : ", candidat[i].age);
             console.log("Nombre de votes : ", candidat[i].electeurs.length);
+            console.log("***************************************************")
         }
     }
-    if (choix == 2) {
+    else if (choix == 2) {
         let partpolitique = prompt("entrez la partie politique : ")
         for (let i = 0; i < candidat.length; i++) {
             if (candidat[i].partiPolitique == partpolitique) {
-                console.log("Identifiant : ", candidat[i].cin);
-                console.log("nom : ", candidat[i].nom);
-                console.log("prénom : ", candidat[i].prenom);
-                console.log("Parti politique : ", candidat[i].partiPolitique);
-                console.log("Âge : ", candidat[i].age);
-                console.log("Nombre de votes : ", candidat[i].electeurs.length);
+                console.log(candidat[i]);
             }
 
         }
@@ -242,7 +238,7 @@ function VoterCandidats(candidats) {
 
     }
 }
-
+// Pour modifier le parti politique et l'age d'un candidat
 function ModifierCandidat(candidat) {
     let cin = prompt('CIN de candidat : ');
     let index = candidat.findIndex(function (c) {
@@ -271,7 +267,7 @@ function ModifierCandidat(candidat) {
         console.log("cin n'exit pas");
     }
 }
-
+// Pour supprimer un candidat par son cin
 function SupprimerCandidat(candidat) {
     let cin = prompt('cin de candidat que vous voulez supprimer : ');
     let index = candidat.findIndex(function (c) {
@@ -284,6 +280,24 @@ function SupprimerCandidat(candidat) {
     else {
         console.log("cin introuvable ")
     }
+}
+// Pour chercher un candidat par son nom
+function RechercherCandidat(candidat) {
+    let nom = prompt('tapez le nom : ');
+
+    let resultat = candidat.filter(function (c) {
+        return c.nom === nom;
+    });
+
+    if (resultat.length > 0) {
+        console.log(resultat);
+
+
+    } else {
+        console.log("Aucun candidat trouvé avec ce nom");
+    }
+
+
 }
 
 
@@ -322,7 +336,11 @@ while (choix != "0") {
             break;
         case "6":
             SupprimerCandidat(candidats);
-            break;    
+            break;
+        case "7":
+            RechercherCandidat(candidats);
+            break;
+            
 
     }
 }
