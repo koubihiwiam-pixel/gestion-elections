@@ -147,7 +147,7 @@ function AjouterCandidat(candidat) {
     let partipolitique = prompt('quel partie politique : ');
     let age = +prompt("l'age : ");
     let index = candidats.findIndex(function (c) {
-        return c.cin === cin;
+        return c.cin.toUpperCase() === cin.toUpperCase();
     });
     if (index === -1) {
 
@@ -210,13 +210,37 @@ function AfficherListeCandidats(candidat) {
         }
     }
     else {
-                console.log("choix invalide !");
-            }
-
-
+        console.log("choix invalide !");
+    }
 }
 
+// Pour voter pour un candidat
+function VoterCandidats(candidats) {
+    let id = prompt('entrez  cin de votant : ');
+    let vote = false;
+    for(let i =0 ;i<candidats.length;i++){
+    if (candidats[i].electeurs.includes(id)) {
+        vote = true;
+        break;
+    }}
+    if (vote){
+        console.log(" Vous avez déjà voté et vous n’avez pas le droit de modifier votre vote ni de voter à nouveau ");
+    }
+    else {
+        let id2 = prompt('entrez cin de candidat : ');
+        let index = candidats.findIndex(function (candidat) {
+        return candidat.cin === id2;
+});
+    if (index != -1){
+        candidats[index].electeurs.push(id);
+        console.log("voter vote est enregiste")
 
+    }else {
+        console.log("il n'y a pas ce candidat")
+    }
+
+}
+}
 
 
 
@@ -247,6 +271,9 @@ while (choix != "0") {
         case "3":
             AfficherListeCandidats(candidats);
             break;
+         case "4":
+            VoterCandidats(candidats);
+            break;    
 
     }
 }
