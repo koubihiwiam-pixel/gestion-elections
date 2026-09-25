@@ -218,29 +218,60 @@ function AfficherListeCandidats(candidat) {
 function VoterCandidats(candidats) {
     let id = prompt('entrez  cin de votant : ');
     let vote = false;
-    for(let i =0 ;i<candidats.length;i++){
-    if (candidats[i].electeurs.includes(id)) {
-        vote = true;
-        break;
-    }}
-    if (vote){
+    for (let i = 0; i < candidats.length; i++) {
+        if (candidats[i].electeurs.includes(id)) {
+            vote = true;
+            break;
+        }
+    }
+    if (vote) {
         console.log(" Vous avez déjà voté et vous n’avez pas le droit de modifier votre vote ni de voter à nouveau ");
     }
     else {
         let id2 = prompt('entrez cin de candidat : ');
         let index = candidats.findIndex(function (candidat) {
-        return candidat.cin === id2;
-});
-    if (index != -1){
-        candidats[index].electeurs.push(id);
-        console.log("voter vote est enregiste")
+            return candidat.cin === id2;
+        });
+        if (index != -1) {
+            candidats[index].electeurs.push(id);
+            console.log("voter vote est enregiste")
 
-    }else {
-        console.log("il n'y a pas ce candidat")
+        } else {
+            console.log("il n'y a pas ce candidat")
+        }
+
     }
+}
 
+function ModifierCandidat(candidat) {
+    let cin = prompt('CIN de candidat : ');
+    let index = candidat.findIndex(function (c) {
+        return c.cin == cin
+    });
+    if (index != -1) {
+        console.log("1--> Modifier le parti politique");
+        console.log("2--> Modifier l'age ");
+    
+    let choix = prompt('ton choix : ');
+    if(choix == 1){
+        let partpol = prompt('nouveau parti politique');
+        candidat[index].partiPolitique = partpol;
+        console.log("le parti politique change avec succes");
+    }
+    else if(choix ==2){
+        let age = +prompt('nouveau age : ');
+        candidat[index].age = age;
+        console.log("l'age est change");
+    }
+    else{
+        console.log("choix invalid!")
+    }
+    }
+    else{
+        console.log("cin n'exit pas");
+    }
 }
-}
+
 
 
 
@@ -271,8 +302,11 @@ while (choix != "0") {
         case "3":
             AfficherListeCandidats(candidats);
             break;
-         case "4":
+        case "4":
             VoterCandidats(candidats);
+            break;
+        case "5":
+            ModifierCandidat(candidats);
             break;    
 
     }
