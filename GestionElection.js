@@ -251,28 +251,40 @@ function ModifierCandidat(candidat) {
     if (index != -1) {
         console.log("1--> Modifier le parti politique");
         console.log("2--> Modifier l'age ");
-    
-    let choix = prompt('ton choix : ');
-    if(choix == 1){
-        let partpol = prompt('nouveau parti politique');
-        candidat[index].partiPolitique = partpol;
-        console.log("le parti politique change avec succes");
+
+        let choix = prompt('ton choix : ');
+        if (choix == 1) {
+            let partpol = prompt('nouveau parti politique');
+            candidat[index].partiPolitique = partpol;
+            console.log("le parti politique change avec succes");
+        }
+        else if (choix == 2) {
+            let age = +prompt('nouveau age : ');
+            candidat[index].age = age;
+            console.log("l'age est change");
+        }
+        else {
+            console.log("choix invalid!")
+        }
     }
-    else if(choix ==2){
-        let age = +prompt('nouveau age : ');
-        candidat[index].age = age;
-        console.log("l'age est change");
-    }
-    else{
-        console.log("choix invalid!")
-    }
-    }
-    else{
+    else {
         console.log("cin n'exit pas");
     }
 }
 
-
+function SupprimerCandidat(candidat) {
+    let cin = prompt('cin de candidat que vous voulez supprimer : ');
+    let index = candidat.findIndex(function (c) {
+        return c.cin == cin
+    });
+    if (index != -1) {
+        candidat.splice(index, 1);
+        console.log("Le candidat a été supprimé avec succès");
+    }
+    else {
+        console.log("cin introuvable ")
+    }
+}
 
 
 // menu principal
@@ -307,6 +319,9 @@ while (choix != "0") {
             break;
         case "5":
             ModifierCandidat(candidats);
+            break;
+        case "6":
+            SupprimerCandidat(candidats);
             break;    
 
     }
