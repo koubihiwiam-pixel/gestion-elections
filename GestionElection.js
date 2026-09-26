@@ -193,12 +193,17 @@ function TriParVot(candidat) {
 
 function FilterPartPolitique(candidat) {
     let tab = []
+    let verifier = false ;
     let partpolitique = prompt("entrez la partie politique : ")
     for (let i = 0; i < candidat.length; i++) {
         if (candidat[i].partiPolitique == partpolitique) {
-            tab.push(candidat[i])
+            tab.push(candidat[i]);
+            verifier = true ;
         }
     }
+    if (verifier == false){
+        console.log("ce parti politique n'exite pas ");
+    } 
     console.table(tab);
 }
 function AfficherListeCandidats() {
@@ -249,7 +254,7 @@ function VoterCandidats(candidats) {
 function ModifierCandidat(candidat) {
     let cin = prompt('CIN de candidat : ');
     let index = candidat.findIndex(function (c) {
-        return c.cin == cin
+        return c.cin.toUpperCase() == cin.toUpperCase();
     });
     if (index != -1) {
         console.log("1--> Modifier le parti politique");
@@ -278,7 +283,7 @@ function ModifierCandidat(candidat) {
 function SupprimerCandidat(candidat) {
     let cin = prompt('cin de candidat que vous voulez supprimer : ');
     let index = candidat.findIndex(function (c) {
-        return c.cin == cin
+        return c.cin.toUpperCase() == cin.toUpperCase();
     });
     if (index != -1) {
         candidat.splice(index, 1);
@@ -290,12 +295,16 @@ function SupprimerCandidat(candidat) {
 }
 // Pour chercher un candidat par son nom
 function RechercherCandidat(candidat) {
+    let verifier = false
     let nom = prompt('tapez le nom : ');
     for (let i = 0; i < candidat.length; i++) {
         if (candidat[i].nom == nom) {
             console.log(candidat[i]);
+            verifier = true
         }
-
+    }
+    if(verifier == false ){
+        console.log("ce nom n'existe pas ");
     }
 }
 // Pour statistiques de l'élection
@@ -415,6 +424,6 @@ while (choix != "0") {
             break;
         case "8":
             statistiques();
-            break;
+            break;    
     }
 }
