@@ -284,22 +284,14 @@ function SupprimerCandidat(candidat) {
 // Pour chercher un candidat par son nom
 function RechercherCandidat(candidat) {
     let nom = prompt('tapez le nom : ');
+   for (let i = 0; i < candidat.length; i++) {
+            if (candidat[i].nom == nom) {
+                console.log(candidat[i]);
+            }
 
-    let resultat = candidat.filter(function (c) {
-        return c.nom === nom;
-    });
-
-    if (resultat.length > 0) {
-        console.log(resultat);
-
-
-    } else {
-        console.log("Aucun candidat trouvé avec ce nom");
-    }
-
-
+        }
 }
-
+// Pour 
 
 // menu principal
 let choix;
@@ -340,7 +332,5 @@ while (choix != "0") {
         case "7":
             RechercherCandidat(candidats);
             break;
-            
-
     }
 }
